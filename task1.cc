@@ -193,7 +193,7 @@ void my_tri_interp(
 }
 
 // vectorize the whole `for` loop
-void tri_interp_vector(
+void tri_interp_vector_for_loop(
 	double result[3],
 	const double point[3],
 	const double corner[3],
@@ -242,7 +242,7 @@ void tri_interp_vector(
 }
 
 // simplify the expression
-void tri_interp_vector2(
+void tri_interp_vector_for_loop_simplified(
 	double result[3],
 	const double point[3],
 	const double corner[3],
@@ -302,12 +302,12 @@ int main()
 	std::cerr << benchmark(my_tri_interp); 
 	std::cerr << " sec\n";
 
-	std::cerr << "my_tri_interp_vector1: ";
-	std::cerr << benchmark(tri_interp_vector); 
+	std::cerr << "tri_interp_vector_for_loop: ";
+	std::cerr << benchmark(tri_interp_vector_for_loop); 
 	std::cerr << " sec\n";
 
-	std::cerr << "my_tri_interp_vector2: ";
-	std::cerr << benchmark(tri_interp_vector2); 
+	std::cerr << "tri_interp_vector_for_loop_simplified: ";
+	std::cerr << benchmark(tri_interp_vector_for_loop_simplified); 
 	std::cerr << " sec\n";
 
 	if (!compare(tri_interp_original, my_tri_interp))
@@ -315,16 +315,16 @@ int main()
 	else
 		std::cerr << "my_tri_interp valid\n";
 	
-	if (!compare(tri_interp_original, tri_interp_vector))
-		std::cerr << "my_tri_interp_vector1 not valid\n";
+	if (!compare(tri_interp_original, tri_interp_vector_for_loop))
+		std::cerr << "tri_interp_vector_for_loop not valid\n";
 	else
-		std::cerr << "my_tri_interp_vector1 valid\n";
+		std::cerr << "tri_interp_vector_for_loop valid\n";
 
 
-	if (!compare(tri_interp_original, tri_interp_vector2))
-		std::cerr << "my_tri_interp_vector2 not valid\n";
+	if (!compare(tri_interp_original, tri_interp_vector_for_loop_simplified))
+		std::cerr << "tri_interp_vector_for_loop_simplified not valid\n";
 	else
-		std::cerr << "my_tri_interp_vector2 valid\n";
+		std::cerr << "tri_interp_vector_for_loop_simplified valid\n";
 	
 	return 0;
 }
